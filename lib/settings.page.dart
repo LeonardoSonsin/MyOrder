@@ -15,32 +15,30 @@ class HomePageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configurações'),
+        title: const Text('Configurações'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.pop(context, '/home');
           },
         ),
       ),
-      body: Container(
-        child: Card(
-          child: Padding(
-            padding:
-                const EdgeInsets.only(left: 12, right: 12, top: 20, bottom: 12),
-            child: Row(
-              children: [
-                Text(
-                  'Modo Escuro',
-                  textAlign: TextAlign.right,
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                CustomSwitch(),
-              ],
-            ),
+      body: Card(
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 12, right: 12, top: 20, bottom: 12),
+          child: Row(
+            children: [
+              Text(
+                'Modo Escuro',
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 20),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              CustomSwitch(),
+            ],
           ),
         ),
       ),
@@ -49,6 +47,8 @@ class HomePageState extends State<SettingsPage> {
 }
 
 class CustomSwitch extends StatelessWidget {
+  const CustomSwitch({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Switch(
