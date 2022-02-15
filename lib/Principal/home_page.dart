@@ -116,13 +116,15 @@ class MenuDoUsuario extends StatelessWidget {
             accountEmail: const Text('myorder@myorder.com'),
           ),
           ListTile(
-            leading: const Icon(Icons.account_circle),
+            leading: const Icon(Icons.account_circle_outlined),
             title: const Text('Minha conta'),
             subtitle: const Text('Informações da sua conta'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/account');
+              },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
+            leading: const Icon(Icons.settings_outlined),
             title: const Text('Configurações'),
             subtitle: const Text('Minhas configurações'),
             onTap: () {
@@ -130,13 +132,15 @@ class MenuDoUsuario extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.contact_support),
+            leading: const Icon(Icons.help_outline),
             title: const Text('Suporte'),
             subtitle: const Text('Contate nossa equipe'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/help');
+            },
           ),
           ListTile(
-            leading: const Icon(Icons.arrow_back_ios),
+            leading: const Icon(Icons.logout),
             title: const Text('Sair'),
             subtitle: const Text('Finalizar sessão'),
             onTap: () {

@@ -4,5 +4,3 @@ import 'app_widget.dart';
 main() {
   runApp(AppWidget());
 }
-
-

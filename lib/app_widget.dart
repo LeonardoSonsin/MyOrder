@@ -1,12 +1,15 @@
-import 'package:app1/Cadastro/register_page.dart';
-import 'package:app1/Cadastro/register_page2.dart';
-import 'package:app1/settings.page.dart';
-import 'package:flutter/material.dart';
-import 'Cadastro/forget_page.dart';
+import 'Principal/home_page.dart';
+import 'Principal/login_page.dart';
+import 'Cadastro/register_page.dart';
+import 'Cadastro/register_page2.dart';
 import 'Cadastro/register_page3.dart';
+import 'Cadastro/forget_page.dart';
+import 'Usuário/account_page.dart';
+import 'Usuário/settings_page.dart';
+import 'Usuário/help_page.dart';
+
 import 'app_controller.dart';
-import 'home_page.dart';
-import 'login_page.dart';
+import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -29,7 +32,9 @@ class AppWidget extends StatelessWidget {
             '/register1': (context) => RegisterPage(),
             '/register2': (context) => RegisterPage2(),
             '/register3': (context) => RegisterPage3(),
+            '/account': (context) => AccountPage(),
             '/settings': (context) => SettingsPage(),
+            '/help': (context) => HelpPage(),
           }
         );
       },
