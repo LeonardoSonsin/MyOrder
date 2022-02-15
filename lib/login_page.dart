@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                               style:
                                   TextStyle(fontSize: 15, color: Colors.red)),
                         ),
-                        onPressed: () {},
+                        onPressed: () {Navigator.of(context).pushNamed('/forget');},
                       ),
                       Container(height: 20),
                       const Divider(),

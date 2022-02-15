@@ -2,6 +2,7 @@ import 'package:app1/Cadastro/register_page.dart';
 import 'package:app1/Cadastro/register_page2.dart';
 import 'package:app1/settings.page.dart';
 import 'package:flutter/material.dart';
+import 'Cadastro/forget_page.dart';
 import 'Cadastro/register_page3.dart';
 import 'app_controller.dart';
 import 'home_page.dart';
@@ -24,6 +25,7 @@ class AppWidget extends StatelessWidget {
           routes: {
             '/login': (context) => LoginPage(),
             '/home': (context) => HomePage(),
+            '/forget': (context) => ForgetPage(),
             '/register1': (context) => RegisterPage(),
             '/register2': (context) => RegisterPage2(),
             '/register3': (context) => RegisterPage3(),
