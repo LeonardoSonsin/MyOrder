@@ -43,27 +43,170 @@ class ListaNotificacoes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Card(
-          child: ListView(
-            children: <Widget>[
-              ListTile(
-                leading: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Image.asset('assets/imagens/icone_restaurante.png'),
-                ),
-                title: const Text('Título da notificação',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                subtitle: const Text('Subtítulo da notificação'),
-                trailing: const Text('14:00'),
-                onTap: () {},
+    return Column(
+      children: [
+        Container(
+          height: 150,
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            height: 100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(color: Colors.grey)
               ),
-              const Divider(),
-            ],
-          )),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Minha carteira',
+                  style: TextStyle(fontSize: 15.0),
+                ),
+                Container(
+                  height: 15,
+                ),
+                Text('Saldo disponível', style: TextStyle(fontSize: 12.0)),
+                Text(
+                  String.fromCharCodes(
+                    Runes('R\u0024 0,00'),
+                  ),
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Formas de pagamento',
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 18.0),
+                ),
+                Container(height: 10),
+                Row(
+                  children: [InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.all(9.0),
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                          border: Border.all(color: Colors.grey)
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.add, color: Colors.red,),
+                          Container(height: 20),
+                          Text(
+                            'Cadastrar',
+                          ),
+                          Text(('Novo cartão'),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                    },
+                  )],
+                ),
+                Container(height: 30),
+                Text(
+                  'Outros serviços',
+                  style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 18.0),
+                ),
+                Container(height: 10),
+                Row(
+                  children: [InkWell(
+                    child: Container(
+                      height: 60,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100.0),
+                          border: Border.all(color: Colors.grey)
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.credit_score, color: Colors.red),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                    },
+                  ),
+                  Container(width: 15),
+                    InkWell(
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100.0),
+                            border: Border.all(color: Colors.grey)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.tag_faces_outlined, color: Colors.red),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                      },
+                    ),
+                    Container(width: 15),
+                    InkWell(
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100.0),
+                            border: Border.all(color: Colors.grey)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.monetization_on_outlined, color: Colors.red),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                      },
+                    ),
+                    Container(width: 15),
+                    InkWell(
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100.0),
+                            border: Border.all(color: Colors.grey)
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.work_outline, color: Colors.red),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            )),
+      ],
     );
   }
 }

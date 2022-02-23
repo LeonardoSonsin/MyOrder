@@ -1,5 +1,6 @@
 import 'package:app1/Principal/home_page.dart';
-import 'package:app1/Usuario/account_page.dart';
+import 'package:app1/Principal/qrscan_page.dart';
+import 'package:app1/Usuario/notifications_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -15,6 +16,8 @@ class NavigationPageState extends State<NavigationPage> {
   int _indiceAtual = 0;
   final List<Widget> _telas = [
     HomePage(),
+    QrscanPage(),
+    NotificationsPage(),
   ];
 
   @override

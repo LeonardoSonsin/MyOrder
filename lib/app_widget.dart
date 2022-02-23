@@ -1,3 +1,4 @@
+import 'package:app1/Principal/qrscan_page.dart';
 import 'package:app1/navigator.dart';
 
 import 'Principal/login_page.dart';
@@ -31,6 +32,7 @@ class AppWidget extends StatelessWidget {
           routes: {
             '/login': (context) => LoginPage(),
             '/home': (context) => NavigationPage(),
+            '/qrscan': (context) => QrscanPage(),
             '/forget': (context) => ForgetPage(),
             '/register1': (context) => RegisterPage(),
             '/register2': (context) => RegisterPage2(),
