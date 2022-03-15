@@ -68,6 +68,7 @@ flutter:
     - assets/imagens/forget_password.png
     - assets/imagens/icone_restaurante.png
     - assets/imagens/qrcode.png
+    - assets/imagens/banner.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

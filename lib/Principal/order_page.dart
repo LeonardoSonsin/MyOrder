@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({Key key}) : super(key: key);
+class OrderPage extends StatefulWidget {
+  const OrderPage({Key key}) : super(key: key);
 
   @override
-  State<NotificationsPage> createState() {
-    return _NotificationsPageState();
+  State<OrderPage> createState() {
+    return OrderPageState();
   }
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +18,11 @@ class _NotificationsPageState extends State<NotificationsPage> {
         width: double.infinity,
         height: double.infinity,
         child: Card(
-            child: ListView.builder(
-              itemBuilder: (context, index) => MyListTile(),
+            child: ListView(
+              children: <Widget>[
+                MyListTile(),
+                Container(height: 5),
+              ],
             )),
       ),
     );
@@ -38,7 +41,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: const Text('Notificações'),
+      title: const Text('Pedidos'),
     );
   }
 }
@@ -49,12 +52,23 @@ class MyListTile extends StatefulWidget {
 }
 
 class _MyListTileState extends State<MyListTile> {
-  bool Lido = false;
+  int status = 0;
+
+  get tileColor {
+    switch(status) {
+      case 0: {
+        return Colors.black26;
+      }
+      case 1: {
+        return Colors.white;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      tileColor: Lido ? Colors.white : Colors.black26,
+      tileColor: tileColor,
       leading: SizedBox(
         width: 50,
         height: 50,
@@ -64,9 +78,9 @@ class _MyListTileState extends State<MyListTile> {
           style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
       subtitle: const Text('Subtítulo da notificação'),
       trailing: const Text('14:00'),
-      onTap: () {Lido = !Lido;
-      setState(() {
-      });},
+      onTap: () => setState(() {
+        status++;
+      }),
     );
   }
 }

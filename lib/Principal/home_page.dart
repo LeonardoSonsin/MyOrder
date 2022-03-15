@@ -18,17 +18,17 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: const MenuDoUsuario(),
       appBar: AppBar(
         centerTitle: true,
         title: barraPesquisa,
         automaticallyImplyLeading: false,
-        leading: IconButton(icon: Icon(Icons.account_circle_outlined), onPressed: () {_scaffoldKey.currentState.openDrawer();},),
         actions: <Widget>[
-          IconButton(icon: iconeDireita, onPressed: () {
-            setState(() {
-              if (iconeDireita.icon == Icons.search_outlined) {
-                iconeDireita = const Icon(Icons.cancel);
+          IconButton(
+            icon: iconeDireita,
+            onPressed: () {
+              setState(() {
+                if (iconeDireita.icon == Icons.search_outlined) {
+                  iconeDireita = const Icon(Icons.cancel);
                   barraPesquisa = const ListTile(
                     title: TextField(
                       decoration: InputDecoration(
@@ -45,69 +45,119 @@ class HomePageState extends State<HomePage> {
                       ),
                     ),
                   );
-              } else {
-                iconeDireita = const Icon(Icons.search_outlined);
-                barraPesquisa = const Text('Restaurantes');
-              }
-            });
-          },)
+                } else {
+                  iconeDireita = const Icon(Icons.search_outlined);
+                  barraPesquisa = const Text('Restaurantes');
+                }
+              });
+            },
+          )
         ],
       ),
-      body: CardapioListaItens(),
+      body: const home_Body(),
     );
   }
 }
 
-class CardapioListaItens extends StatelessWidget {
-  const CardapioListaItens({
+class home_Body extends StatelessWidget {
+  const home_Body({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Card(
-          child: ListView(
-        children: const [
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
-          Divider(),
-          Restaurante(),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(height: 10),
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: Colors.red, borderRadius: BorderRadius.circular(15)),
+            child: Center(
+              child: Column(
+                children: const <Widget>[
+                  Icon(Icons.wallet_giftcard, color: Colors.white, size: 50),
+                  Text('Cupons Disponíveis',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ))
+                ],
+              ),
+            ),
+          ),
+          Container(height: 15),
+          const Text('   Famosos no MyOrder',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Container(height: 10),
+          SizedBox(
+            height: 120,
+            child: ListView.builder(
+              itemCount: 10,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  InkWell(
+                    child: Container(
+                      height: 65,
+                      width: 65,
+                      margin: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child:
+                          Image.asset('assets/imagens/icone_restaurante.png'),
+                    ),
+                    onTap: () {},
+                  ),
+                  const Text("MyOrder"),
+                ],
+              ),
+            ),
+          ),
+          Container(height: 15),
+          const Text('   Lojas',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Container(height: 10),
+          Flexible(
+            child: ListView.builder(
+              itemCount: 15,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) => ListaRestaurante(),
+            ),
+          ),
         ],
-      )),
+      ),
     );
   }
 }
 
-class Restaurante extends StatelessWidget {
-  const Restaurante({
+class ListaRestaurante extends StatefulWidget {
+  const ListaRestaurante({
     Key key,
   }) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => new Restaurante();
+}
+
+class Restaurante extends State<ListaRestaurante> {
+  bool Favorito = false;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      isThreeLine: true,
       leading: SizedBox(
         width: 50,
         height: 50,
         child: Image.asset('assets/imagens/icone_restaurante.png'),
       ),
-      title: const Text('Nome', style: TextStyle(fontSize: 15)),
+      title: const Text('Restaurante MyOrder', style: TextStyle(fontSize: 15)),
       subtitle: const Text.rich(
         TextSpan(
           style: TextStyle(
@@ -115,88 +165,24 @@ class Restaurante extends StatelessWidget {
           ),
           children: <TextSpan>[
             TextSpan(text: '★ 4,9  ', style: TextStyle(color: Colors.amber)),
-            TextSpan(text: '•  Tipo  •  3,0 km'),
+            TextSpan(text: '•  Pizzaria'),
+            TextSpan(text: '\nAberto', style: TextStyle(color: Colors.green)),
+            TextSpan(text: '  •  3,0 km'),
           ],
         ),
       ),
       trailing: IconButton(
-        icon: const Icon(Icons.favorite_outline),
-        onPressed: () {},
+        icon: Favorito
+            ? Icon(Icons.favorite, color: Colors.red)
+            : Icon(Icons.favorite_outline),
+        onPressed: () {
+          Favorito = !Favorito;
+          setState(() {});
+        },
       ),
-      onTap: () {},
-    );
-  }
-}
-
-class MenuDoUsuario extends StatelessWidget {
-  const MenuDoUsuario({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(children: [
-        UserAccountsDrawerHeader(
-          currentAccountPicture: Image.asset('assets/imagens/logo.png'),
-          accountName: const Text('Usuário Teste'),
-          accountEmail: const Text('myorder@myorder.com'),
-        ),
-        ListTile(
-          leading: const Icon(Icons.account_circle_outlined),
-          title: const Text('Minha conta'),
-          subtitle: const Text('Informações da sua conta'),
-          trailing: const Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).pushNamed('/account');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.notifications_none_outlined),
-          title: const Text('Notificações'),
-          subtitle: const Text('Central de notificações'),
-          trailing: const Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).pushNamed('/notifications');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.credit_card),
-          title: const Text('Pagamentos'),
-          subtitle: const Text('Meus saldos e cartões'),
-          trailing: const Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).pushNamed('/payments');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.settings_outlined),
-          title: const Text('Configurações'),
-          subtitle: const Text('Minhas configurações'),
-          trailing: const Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).pushNamed('/settings');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.help_outline),
-          title: const Text('Suporte'),
-          subtitle: const Text('Contate nossa equipe'),
-          trailing: const Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).pushNamed('/help');
-          },
-        ),
-        ListTile(
-          leading: const Icon(Icons.logout),
-          title: const Text('Sair'),
-          subtitle: const Text('Finalizar sessão'),
-          trailing: const Icon(Icons.keyboard_arrow_right),
-          onTap: () {
-            Navigator.of(context).pushReplacementNamed('/login');
-          },
-        ),
-      ]),
+      onTap: () {
+        Navigator.of(context).pushNamed('/restaurant');
+      },
     );
   }
 }
@@ -211,7 +197,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return AppBar(
       title: const Text('Suporte'),
     );

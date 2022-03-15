@@ -1,11 +1,15 @@
+import 'package:app1/Cardapio/food.dart';
+import 'package:app1/Principal/menu_page.dart';
 import 'package:app1/Principal/qrscan_page.dart';
-import 'package:app1/navigator.dart';
+import 'package:app1/home_navigator.dart';
+import 'package:app1/order_navigator.dart';
 
 import 'Principal/login_page.dart';
 import 'Cadastro/register_page.dart';
 import 'Cadastro/register_page2.dart';
 import 'Cadastro/register_page3.dart';
 import 'Cadastro/forget_page.dart';
+import 'Principal/restaurant_page.dart';
 import 'Usuario/account_page.dart';
 import 'Usuario/help_page.dart';
 import 'Usuario/notifications_page.dart';
@@ -31,17 +35,22 @@ class AppWidget extends StatelessWidget {
           initialRoute: '/login',
           routes: {
             '/login': (context) => LoginPage(),
-            '/home': (context) => NavigationPage(),
-            '/qrscan': (context) => QrscanPage(),
             '/forget': (context) => ForgetPage(),
             '/register1': (context) => RegisterPage(),
             '/register2': (context) => RegisterPage2(),
             '/register3': (context) => RegisterPage3(),
-            '/account': (context) => AccountPage(),
+            '/home': (context) => HomeNavigationPage(),
+            '/qrscan': (context) => QrscanPage(),
             '/notifications': (context) => NotificationsPage(),
             '/payments': (context) => PaymentsPage(),
             '/settings': (context) => SettingsPage(),
             '/help': (context) => HelpPage(),
+            '/account': (context) => AccountPage(),
+            '/restaurant': (context) => RestaurantPage(),
+            '/order': (context) => OrderNavigationPage(),
+            '/food': (context) => FoodPage(),
+
+
           }
         );
       },

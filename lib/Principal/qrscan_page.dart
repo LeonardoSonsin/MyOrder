@@ -46,7 +46,7 @@ class _QrscanPageState extends State<QrscanPage> {
                 const Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Para fazer seu pedido, por favor, dirija-se ao local e escaneie o código QR disponibilizado em sua mesa.',
+                    'Para fazer seu pedido, por favor, dirija-se até o local e escaneie o código QR disponibilizado em sua mesa.',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15),
                   ),
@@ -63,7 +63,7 @@ class _QrscanPageState extends State<QrscanPage> {
                       )
                   ),
                 ElevatedButton.icon(
-                  onPressed: readQRCode,
+                  onPressed: () {Navigator.of(context).pushReplacementNamed('/order');},// apagar tudo e só deixar 'readQRCode'
                   icon: Icon(Icons.qr_code),
                   label: Text('Escanear'),
                 ),
