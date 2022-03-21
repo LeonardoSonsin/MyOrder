@@ -31,7 +31,7 @@ class OrderNavigationPageState extends State<OrderNavigationPage> {
         onTap: onTabTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.menu_book_outlined), label: "Cardápio"),
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant_menu), label: "Pedido"),
+          BottomNavigationBarItem(icon: Icon(Icons.sticky_note_2_outlined), label: "Comanda"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
         ],
       ),

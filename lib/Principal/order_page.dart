@@ -1,86 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import '../models/carrinho_model/carrinho_model.dart';
+import '../models/carrinho_model/comanda_model.dart';
 
 class OrderPage extends StatefulWidget {
-  const OrderPage({Key key}) : super(key: key);
+  OrderPage(
+      {Key key})
+      : super(key: key);
 
   @override
-  State<OrderPage> createState() {
-    return OrderPageState();
+  State<StatefulWidget> createState() {
+    return _OrderPageState();
   }
 }
 
-class OrderPageState extends State<OrderPage> {
+class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
-      body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Card(
-            child: ListView(
-              children: <Widget>[
-                MyListTile(),
-                Container(height: 5),
-              ],
-            )),
-      ),
-    );
-  }
-}
-
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Size get preferredSize => const Size.fromHeight(50);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      centerTitle: true,
-      title: const Text('Pedidos'),
-    );
-  }
-}
-
-class MyListTile extends StatefulWidget {
-  @override
-  _MyListTileState createState() => _MyListTileState();
-}
-
-class _MyListTileState extends State<MyListTile> {
-  int status = 0;
-
-  get tileColor {
-    switch(status) {
-      case 0: {
-        return Colors.black26;
-      }
-      case 1: {
-        return Colors.white;
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      tileColor: tileColor,
-      leading: SizedBox(
-        width: 50,
-        height: 50,
-        child: Image.asset('assets/imagens/icone_restaurante.png'),
-      ),
-      title: const Text('Título da notificação',
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-      subtitle: const Text('Subtítulo da notificação'),
-      trailing: const Text('14:00'),
-      onTap: () => setState(() {
-        status++;
-      }),
-    );
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text("Comanda"),
+              automaticallyImplyLeading: false,
+            ),
+            body: ScopedModel.of<CartModel>(context, rebuildOnChange: true)
+                    .carrinho
+                    .isEmpty
+                ? const Center(
+                    child: Text("Ainda não há itens selecionados"),
+                  )
+                : Container(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(children: <Widget>[
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: ScopedModel.of<CartModel>(context,
+                                  rebuildOnChange: true)
+                              .total,
+                          itemBuilder: (context, index) {
+                            return ScopedModelDescendant<CartModel>(
+                              builder: (context, child, model) {
+                                return ListTile(
+                                  title: Text(model.carrinho[index].titulo),
+                                  subtitle: Text(model.carrinho[index].qty
+                                          .toString() +
+                                      " x " +
+                                      model.carrinho[index].preco.toString() +
+                                      " = " +
+                                      (model.carrinho[index].qty *
+                                              model.carrinho[index].preco)
+                                          .toString()),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                          width: double.infinity,
+                          child: Text(
+                            "Total: R\$ " +
+                                ScopedModel.of<CartModel>(context,
+                                        rebuildOnChange: false)
+                                    .totalConta
+                                    .toString() +
+                                "",
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                                fontSize: 24.0, fontWeight: FontWeight.bold),
+                          )),
+                      SizedBox(
+                          width: double.infinity,
+                          child: RaisedButton(
+                            color: Colors.red,
+                            textColor: Colors.white,
+                            child: Text("Ir para pagamento"),
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/pay');
+                            },
+                          ))
+                    ])));
   }
 }
