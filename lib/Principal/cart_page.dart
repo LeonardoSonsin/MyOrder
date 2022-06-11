@@ -100,7 +100,7 @@ class _CartPageState extends State<CartPage> {
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                     onPressed: () {
-                      ScopedModel.of<CartModel>(context).limparCarrinho();
+                      //ScopedModel.of<CartModel>(context).limparCarrinho();
                       Navigator.of(context).pushReplacementNamed('/order');
                       showAlertDialog(context);
                     },
